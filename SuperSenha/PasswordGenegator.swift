@@ -39,6 +39,7 @@ class PasswordGenerator {
         passwords.removeAll()
         var universe: String = ""
         
+        
         if useLatters {
             universe += letters
         }

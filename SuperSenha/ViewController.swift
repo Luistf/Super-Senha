@@ -34,6 +34,9 @@ class ViewController: UIViewController {
         if let numberOfCharacters = Int(textFieldTotalNumberOfCharacters.text!) {
             passwordViewController.numberOfCharacters = numberOfCharacters
         }
+        if !(switchCapitalLatters.isOn || switchNumbers.isOn || switchSpecialCharacters.isOn || switchCapitalLatters.isOn) {
+            dispararAlerta()
+        }
         passwordViewController.userLetters = switchLatters.isOn
         passwordViewController.userNumbers = switchNumbers.isOn
         passwordViewController.userSpecialCharacters = switchSpecialCharacters.isOn
@@ -49,6 +52,23 @@ class ViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.becomeFirstResponder()
+    }
+    
+    //MARK: Actions
+    func dispararAlerta() {
+        
+        let alerta = UIAlertController(title: "alerta", message: "Selecione ao menos um tipo de caracter", preferredStyle: .actionSheet)
+        
+        let botaoOk = UIAlertAction(title: "OK", style: .default) { (acao) in
+            print("Pressionou OK")
+        }
+        
+        //Adicionando botoes ao alerta
+        alerta.addAction(botaoOk)
+        
+        //apresentando o alerta
+        present(alerta, animated: true, completion: nil)
+        
     }
 
 }
