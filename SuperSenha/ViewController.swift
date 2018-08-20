@@ -40,7 +40,16 @@ class ViewController: UIViewController {
         passwordViewController.userCapitalLatters = switchCapitalLatters.isOn
         view.endEditing(true)
     }
-
+    
+    //MARK: Metodos UIResponder
+    override var canBecomeFirstResponder: Bool {
+        
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.becomeFirstResponder()
+    }
 
 }
 
