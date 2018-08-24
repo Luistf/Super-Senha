@@ -29,13 +29,17 @@ class ViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let passwordViewController = segue.destination as! PasswordViewController
         if let numberOfPassword = Int(textFieldTotalPasswords.text!) {
-            passwordViewController.numberOfPasswords = numberOfPassword
+            if numberOfPassword <= 100 {
+                passwordViewController.numberOfPasswords = numberOfPassword
+            } else {
+                fireAlert(message: "Máximo de 100 senhas")
+            }
         }
         if let numberOfCharacters = Int(textFieldTotalNumberOfCharacters.text!) {
             passwordViewController.numberOfCharacters = numberOfCharacters
         }
-        if !(switchCapitalLatters.isOn || switchNumbers.isOn || switchSpecialCharacters.isOn || switchCapitalLatters.isOn) {
-            dispararAlerta()
+        if !(switchLatters.isOn || switchNumbers.isOn || switchSpecialCharacters.isOn || switchCapitalLatters.isOn) {
+            fireAlert(message: "Selecione ao menos um tipo de caracter")
         }
         passwordViewController.userLetters = switchLatters.isOn
         passwordViewController.userNumbers = switchNumbers.isOn
@@ -55,9 +59,9 @@ class ViewController: UIViewController {
     }
     
     //MARK: Actions
-    func dispararAlerta() {
+    func fireAlert(message: String) {
         
-        let alerta = UIAlertController(title: "alerta", message: "Selecione ao menos um tipo de caracter", preferredStyle: .actionSheet)
+        let alerta = UIAlertController(title: "alerta", message: message, preferredStyle: .alert)
         
         let botaoOk = UIAlertAction(title: "OK", style: .default) { (acao) in
             print("Pressionou OK")
